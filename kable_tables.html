@@ -147,8 +147,8 @@ The following object is masked from 'package:dplyr':
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hbr_summary <span class="ot">&lt;-</span> hbr_maples <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(watershed, year) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_height_cm =</span> <span class="fu">mean</span>(stem_length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_height =</span> <span class="fu">sd</span>(stem_length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_height_cm =</span> <span class="fu">mean</span>(stem_length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">sd_height =</span> <span class="fu">sd</span>(stem_length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'watershed'. You can override using the
 `.groups` argument.</code></pre>
@@ -157,89 +157,53 @@ The following object is masked from 'package:dplyr':
 <p>make a nicer table with it</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>hbr_summary <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Watershed"</span>,<span class="st">"Year"</span>,<span class="st">"Mean Seedling Height (sq.cm)"</span>, <span class="st">"SD Seedling Height (sq. cm)"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">background =</span> <span class="st">"orange"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">" "</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"Seedling dimensions"</span> <span class="ot">=</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">height =</span> <span class="st">"500px"</span>, <span class="at">width =</span> <span class="st">"700px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:700px; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
  <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;position: sticky; top:0; background-color: #FFFFFF;" colspan="2"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; position: sticky; top:0; background-color: #FFFFFF;" colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Seedling dimensions</div></th>
+</tr>
   <tr>
-   <th style="text-align:left;"> watershed </th>
-   <th style="text-align:right;"> year </th>
-   <th style="text-align:right;"> mean_height_cm </th>
-   <th style="text-align:right;"> sd_height </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Watershed </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Year </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Mean Seedling Height (sq.cm) </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> SD Seedling Height (sq. cm) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> Reference </td>
+   <td style="text-align:left;font-weight: bold;background-color: orange !important;"> Reference </td>
    <td style="text-align:right;"> 2003 </td>
    <td style="text-align:right;"> 80.98500 </td>
    <td style="text-align:right;"> 13.93923 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Reference </td>
+   <td style="text-align:left;font-weight: bold;background-color: orange !important;"> Reference </td>
    <td style="text-align:right;"> 2004 </td>
    <td style="text-align:right;"> 85.88136 </td>
    <td style="text-align:right;"> 15.58634 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> W1 </td>
+   <td style="text-align:left;font-weight: bold;background-color: orange !important;"> W1 </td>
    <td style="text-align:right;"> 2003 </td>
    <td style="text-align:right;"> 87.88583 </td>
    <td style="text-align:right;"> 14.34233 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> W1 </td>
+   <td style="text-align:left;font-weight: bold;background-color: orange !important;"> W1 </td>
    <td style="text-align:right;"> 2004 </td>
    <td style="text-align:right;"> 97.51667 </td>
    <td style="text-align:right;"> 13.83007 </td>
   </tr>
 </tbody>
-</table>
-
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>hbr_summary <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> watershed </th>
-   <th style="text-align:right;"> year </th>
-   <th style="text-align:right;"> mean_height_cm </th>
-   <th style="text-align:right;"> sd_height </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Reference </td>
-   <td style="text-align:right;"> 2003 </td>
-   <td style="text-align:right;"> 80.98500 </td>
-   <td style="text-align:right;"> 13.93923 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Reference </td>
-   <td style="text-align:right;"> 2004 </td>
-   <td style="text-align:right;"> 85.88136 </td>
-   <td style="text-align:right;"> 15.58634 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> W1 </td>
-   <td style="text-align:right;"> 2003 </td>
-   <td style="text-align:right;"> 87.88583 </td>
-   <td style="text-align:right;"> 14.34233 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> W1 </td>
-   <td style="text-align:right;"> 2004 </td>
-   <td style="text-align:right;"> 97.51667 </td>
-   <td style="text-align:right;"> 13.83007 </td>
-  </tr>
-</tbody>
-</table>
+</table></div>
 
 </div>
 </div>
